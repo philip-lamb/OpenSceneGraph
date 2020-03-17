@@ -5,6 +5,9 @@
 # Philip Lamb, plamb@mozilla.com
 #
 
+# -e = exit on errors; -x = debug
+set -e
+
 if [[ -z "${EMSDK}" ]]; then
   echo "The environment variable EMSDK must be defined and point to the root of the Emscripten SDK"
   exit 1
@@ -15,6 +18,15 @@ OURDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 OSG_ROOT="${OURDIR}/../.."
 SAVEPWD=${PWD}
 cd "${OSG_ROOT}"
+
+OS=`uname -s`
+if [ "$OS" = "Darwin" ] ; then
+  CPUS=`/usr/sbin/sysctl -n hw.ncpu`
+elif [ "$OS" = "Linux" ] || [ "$OS" = "MINGW64_NT-10.0" ] || [ "$OS" = "CYGWIN_NT-6.1" ] ; then
+  CPUS=`/usr/bin/nproc`
+else
+  CPUS=1
+fi
 
 # Get version.
 VERSION_MAJOR=`sed -En -e 's/SET\(OPENSCENEGRAPH_MAJOR_VERSION ([0-9]+)\)/\1/p' CMakeLists.txt`
@@ -32,7 +44,7 @@ else
 
   SETTINGS="-s USE_ZLIB=1 -s USE_LIBJPEG=1 -s USE_LIBPNG=1 -s USE_FREETYPE=1 -s USE_PTHREADS=1"
   export CFLAGS="${SETTINGS}"
-  export CXXFLAGS="${SETTINGS}"
+  export CXXFLAGS="${SETTINGS} -std=c++11"
   export LDFLAGS="${SETTINGS}"
 
   # Configure.
@@ -40,6 +52,7 @@ else
   -DCMAKE_TOOLCHAIN_FILE=${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DOPENSCENEGRAPH_RELEASE_CANDIDATE=0 \
+  -DCMAKE_CXX_STANDARD="11" \
   -DOSG_GL1_AVAILABLE:BOOL=OFF \
   -DOSG_GL2_AVAILABLE:BOOL=OFF \
   -DOSG_GLES3_AVAILABLE:BOOL=OFF \
@@ -67,13 +80,13 @@ else
   -DFREETYPE_LIBRARY:PATH="~/.emscripten_cache/wasm-obj/libfreetype.a" \
 
   # Build.
-  emmake make
+  emmake make -j ${CPUS}
 fi
 
 # Package
 cd "${OSG_ROOT}/${BUILD_DIR}"
 if [ ! -d "${INSTALL_DIR}" ]; then
-  echo "The install directory '${OSG_ROOT}/${BUILD_DIR}/${INSTALL_DIR}' cannot be found. Skipping packaging."
-else
-  zip --filesync -r "${INSTALL_DIR}.zip" "${INSTALL_DIR}"
+  emmake make install
 fi
+zip --filesync -r "${INSTALL_DIR}.zip" "${INSTALL_DIR}"
+
