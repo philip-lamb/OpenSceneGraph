@@ -276,6 +276,7 @@ IF(LIBLAS_FOUND)
     ADD_PLUGIN_DIRECTORY(las)
 ENDIF()
 
+ADD_PLUGIN_DIRECTORY(gltf)
 
 ####################################################
 #
