@@ -103,3 +103,6 @@ _CPack_Packages/
 #individual build files
 config.yaml
 _build
+
+# WebAssembly builds
+build-wasm/
