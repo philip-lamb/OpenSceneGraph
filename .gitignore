@@ -107,3 +107,10 @@ _build
 
 # WebAssembly builds
 build-wasm/
+
+# Third-party dependencies.
+3rdParty
+
+# macOS builds
+build
+packaging/macos/Binary

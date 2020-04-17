@@ -410,6 +410,22 @@ public:
                                 int unit = 0;
                                 geom->getOrCreateStateSet()->setTextureAttributeAndModes(unit, tex.get(), osg::StateAttribute::ON);
                             }
+                            
+                            if (material.alphaMode != "OPAQUE")
+                            {
+                                if (material.alphaMode == "BLEND")
+                                {                                    
+                                    geom->getOrCreateStateSet()->setMode(GL_BLEND, osg::StateAttribute::ON);
+                                    geom->getOrCreateStateSet()->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+                                    //osgEarth::Util::DiscardAlphaFragments().install(geom->getOrCreateStateSet(), 0.15);
+                                }
+                                else if (material.alphaMode == "MASK")
+                                {
+                                    geom->getOrCreateStateSet()->setMode(GL_BLEND, osg::StateAttribute::ON);
+                                    geom->getOrCreateStateSet()->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+                                    //osgEarth::Util::DiscardAlphaFragments().install(geom->getOrCreateStateSet(), material.alphaCutoff);
+                                }
+                            }
 
                             if (cachedTex)
                             {
@@ -542,6 +558,8 @@ public:
                         geom->accept(sv);
                 }
             }
+
+            //osgEarth::Registry::shaderGenerator().run(geom.get());
         }
 
         return group;
