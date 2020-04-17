@@ -50,8 +50,13 @@ namespace osgFX
     public:
         /// Constructor.
         OutlineTechnique() : Technique(),
-            _lineWidth(), _width(2),
-            _material(), _color(1,1,1,1) {
+            _lineWidth(),
+            _width(2),
+#ifdef OSG_GL_FIXED_FUNCTION_AVAILABLE
+            _material(),
+#endif
+            _color(1,1,1,1)
+        {
         }
 
         /// Validate.
@@ -70,6 +75,7 @@ namespace osgFX
         /// Set outline color.
         void setColor(const osg::Vec4& color) {
             _color = color;
+#ifdef OSG_GL_FIXED_FUNCTION_AVAILABLE
             if (_material.valid()) {
                 const osg::Material::Face face = osg::Material::FRONT_AND_BACK;
                 _material->setAmbient(face, osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
@@ -77,6 +83,7 @@ namespace osgFX
                 _material->setSpecular(face, osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
                 _material->setEmission(face, color);
             }
+#endif
         }
 
     protected:
@@ -120,6 +127,30 @@ namespace osgFX
                                       osg::Stencil::REPLACE);
                 state->setAttributeAndModes(stencil, Override_On);
 
+#ifndef OSG_GL_FIXED_FUNCTION_AVAILABLE
+                const char outline_vert[] =
+                "#ifdef GL_ES\n"
+                "    precision highp float;\n"
+                "#endif\n"
+                "void main()\n"
+                "{\n"
+                "  gl_Position = (gl_ModelViewProjectionMatrix * gl_Vertex) * vec4(1.02, 1.02, 1.0, 1.0);\n"
+                "}\n";
+                const char outline_frag[] =
+                "#ifdef GL_ES\n"
+                "    precision highp float;\n"
+                "#endif\n"
+                "uniform vec4 outlineColor;\n"
+                "void main()\n"
+                "{\n"
+                "  gl_FragColor = outlineColor;\n"
+                "}\n";
+                osg::ref_ptr<osg::Program> outline_program = new osg::Program;
+                outline_program->addShader(new osg::Shader(osg::Shader::VERTEX, outline_vert));
+                outline_program->addShader(new osg::Shader(osg::Shader::FRAGMENT, outline_frag));
+                state->setAttribute(outline_program.get(), Override_On);
+                state->addUniform(new osg::Uniform("outlineColor", _color));
+#else
                 // cull front-facing polys
                 osg::CullFace* cullFace = new osg::CullFace;
                 cullFace->setMode(osg::CullFace::FRONT);
@@ -140,6 +171,7 @@ namespace osgFX
                 _material->setColorMode(osg::Material::OFF);
                 setColor(_color);
                 state->setAttributeAndModes(_material.get(), Override_On);
+#endif
 
                 // disable modes
                 state->setMode(GL_BLEND, Override_Off);
@@ -158,7 +190,9 @@ namespace osgFX
         float _width;
 
         /// Outline Material.
+#ifdef OSG_GL_FIXED_FUNCTION_AVAILABLE
         osg::ref_ptr<osg::Material> _material;
+#endif
         osg::Vec4 _color;
     };
 
