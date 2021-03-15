@@ -69,15 +69,15 @@ else
   -DCMAKE_DISABLE_FIND_PACKAGE_GStreamer=1 \
   -DCMAKE_DISABLE_FIND_PACKAGE_Jasper=1 \
   -DCMAKE_DISABLE_FIND_PACKAGE_TIFF=1 \
-  -DZLIB_INCLUDE_DIR:PATH="~/.emscripten_cache/wasm-obj/include" \
-  -DZLIB_LIBRARY:PATH="~/.emscripten_cache/wasm-obj/libz.a" \
-  -DJPEG_INCLUDE_DIR:PATH="~/.emscripten_cache/wasm-obj/include" \
-  -DJPEG_LIBRARY:PATH="~/.emscripten_cache/wasm-obj/libjpeg.a" \
-  -DPNG_PNG_INCLUDE_DIR:PATH="~/.emscripten_cache/wasm-obj/include" \
-  -DPNG_LIBRARY:PATH="~/.emscripten_cache/wasm-obj/libpng.a" \
-  -DFREETYPE_INCLUDE_DIR_freetype2:PATH="~/.emscripten_cache/wasm-obj/include/freetype2" \
-  -DFREETYPE_INCLUDE_DIR_ft2build:PATH="~/.emscripten_cache/wasm-obj/include/freetype2/freetype" \
-  -DFREETYPE_LIBRARY:PATH="~/.emscripten_cache/wasm-obj/libfreetype.a" \
+  -DZLIB_INCLUDE_DIR:PATH="${EM_CACHE}/sysroot/include" \
+  -DZLIB_LIBRARY:PATH="${EM_CACHE}/sysroot/lib/wasm32-emscripten/libz.a" \
+  -DJPEG_INCLUDE_DIR:PATH="${EM_CACHE}/sysroot/include" \
+  -DJPEG_LIBRARY:PATH="${EM_CACHE}/sysroot/lib/wasm32-emscripten/libjpeg.a" \
+  -DPNG_PNG_INCLUDE_DIR:PATH="${EM_CACHE}/sysroot/include" \
+  -DPNG_LIBRARY:PATH="${EM_CACHE}/sysroot/lib/wasm32-emscripten/libpng.a" \
+  -DFREETYPE_INCLUDE_DIR_freetype2:PATH="${EM_CACHE}/sysroot/include/freetype2" \
+  -DFREETYPE_INCLUDE_DIR_ft2build:PATH="${EM_CACHE}/sysroot/include/freetype2/freetype" \
+  -DFREETYPE_LIBRARY:PATH="${EM_CACHE}/sysroot/lib/wasm32-emscripten/libfreetype.a" \
 
   # Build.
   emmake make -j ${CPUS}
