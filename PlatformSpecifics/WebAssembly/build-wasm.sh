@@ -19,6 +19,8 @@ OSG_ROOT="${OURDIR}/../.."
 SAVEPWD=${PWD}
 cd "${OSG_ROOT}"
 
+OSG_THIRD_PARTY="${OSG_ROOT}/3rdParty/WebAssembly"
+
 OS=`uname -s`
 if [ "$OS" = "Darwin" ] ; then
   CPUS=`/usr/sbin/sysctl -n hw.ncpu`
@@ -78,8 +80,8 @@ else
   -DFREETYPE_INCLUDE_DIR_freetype2:PATH="${EM_CACHE}/sysroot/include/freetype2" \
   -DFREETYPE_INCLUDE_DIR_ft2build:PATH="${EM_CACHE}/sysroot/include/freetype2/freetype" \
   -DFREETYPE_LIBRARY:PATH="${EM_CACHE}/sysroot/lib/wasm32-emscripten/libfreetype.a" \
-  -DGDAL_INCLUDE_DIR:PATH="${OSG_ROOT}/3rdParty/WebAssembly/include/gdal" \
-  -DGDAL_LIBRARY:PATH="${OSG_ROOT}/3rdParty/WebAssembly/lib/libgdal.a;${OSG_ROOT}/3rdParty/WebAssembly/lib/libproj.a" \
+  -DGDAL_INCLUDE_DIR:PATH="${OSG_THIRD_PARTY}/include/gdal" \
+  -DGDAL_LIBRARY:PATH="${OSG_THIRD_PARTY}/lib/libgdal.a;${OSG_THIRD_PARTY}/lib/libproj.a" \
 
   # Build.
   emmake make -j ${CPUS}
@@ -89,6 +91,7 @@ fi
 cd "${OSG_ROOT}/${BUILD_DIR}"
 if [ ! -d "${INSTALL_DIR}" ]; then
   emmake make install
+  cp "${OSG_THIRD_PARTY}/lib/"* "${INSTALL_DIR}/lib"
 fi
 zip --filesync -r "${INSTALL_DIR}.zip" "${INSTALL_DIR}"
 
