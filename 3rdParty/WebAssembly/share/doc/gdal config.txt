@@ -1,0 +1,83 @@
+GDAL is now configured for x86_64-apple-darwin20.3.0
+
+  Installation directory:    /usr/local
+  C compiler:                /Users/phil/r/emsdk/upstream/emscripten/emcc  -g -O2 -fPIC
+  C++ compiler:              /Users/phil/r/emsdk/upstream/emscripten/em++  -g -O2 -fPIC
+
+  LIBTOOL support:           no
+
+  LIBZ support:              internal
+  LIBLZMA support:           no
+  cryptopp support:          no
+  GRASS support:             no
+  CFITSIO support:           no
+  PCRaster support:          no
+  LIBPNG support:            external
+  DDS support:               no
+  GTA support:               no
+  LIBTIFF support:           internal (BigTIFF=yes)
+  LIBGEOTIFF support:        internal
+  LIBJPEG support:           internal
+  12 bit JPEG:               no
+  12 bit JPEG-in-TIFF:       no
+  LIBGIF support:            no
+  OGDI support:              no
+  HDF4 support:              no
+  HDF5 support:              no
+  Kea support:               no
+  NetCDF support:            no
+  Kakadu support:            no
+  JasPer support:            no
+  OpenJPEG support:          no
+  ECW support:               no
+  MrSID support:             no
+  MrSID/MG4 Lidar support:   no
+  MSG support:               no
+  GRIB support:              no
+  EPSILON support:           no
+  WebP support:              no
+  cURL support (wms/wcs/...):no
+  PostgreSQL support:        no
+  MRF support:               no
+  MySQL support:             no
+  Ingres support:            no
+  Xerces-C support:          no
+  NAS support:               no
+  Expat support:             no
+  libxml2 support:           no
+  Google libkml support:     no
+  ODBC support:              no
+  PGeo support:              no
+  FGDB support:              no
+  MDB support:               no
+  PCIDSK support:            internal
+  OCI support:               no
+  GEORASTER support:         no
+  SDE support:               no
+  Rasdaman support:          no
+  DODS support:              no
+  SQLite support:            no
+  PCRE support:              no
+  SpatiaLite support:        no
+  DWGdirect support          no
+  INFORMIX DataBlade support:no
+  GEOS support:              no
+  QHull support:             no
+  Poppler support:           no
+  Podofo support:            no
+  PDFium support:            no
+  OpenCL support:            no
+  Armadillo support:         no
+  FreeXL support:            no
+  SOSI support:              no
+  MongoDB support:           no
+
+  Mac OS X Framework :       no
+
+  SWIG Bindings:             no
+
+  Statically link PROJ.4:    yes
+  enable GNM building:       no
+  enable pthread support:    no
+  enable POSIX iconv support:yes
+  hide internal symbols:     no

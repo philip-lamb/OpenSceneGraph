@@ -78,6 +78,8 @@ else
   -DFREETYPE_INCLUDE_DIR_freetype2:PATH="${EM_CACHE}/sysroot/include/freetype2" \
   -DFREETYPE_INCLUDE_DIR_ft2build:PATH="${EM_CACHE}/sysroot/include/freetype2/freetype" \
   -DFREETYPE_LIBRARY:PATH="${EM_CACHE}/sysroot/lib/wasm32-emscripten/libfreetype.a" \
+  -DGDAL_INCLUDE_DIR:PATH="${OSG_ROOT}/3rdParty/WebAssembly/include/gdal" \
+  -DGDAL_LIBRARY:PATH="${OSG_ROOT}/3rdParty/WebAssembly/lib/libgdal.a;${OSG_ROOT}/3rdParty/WebAssembly/lib/libproj.a" \
 
   # Build.
   emmake make -j ${CPUS}
