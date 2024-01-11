@@ -241,7 +241,7 @@ class OSG_EXPORT Plane
 
             int noAbove = 0;
             int noBelow = 0;
-            int noOn = 0;
+            int __attribute__((unused)) noOn = 0;
             for(std::vector<Vec3f>::const_iterator itr=vertices.begin();
                 itr != vertices.end();
                 ++itr)
@@ -270,7 +270,7 @@ class OSG_EXPORT Plane
 
             int noAbove = 0;
             int noBelow = 0;
-            int noOn = 0;
+            int  __attribute__((unused)) noOn = 0;
             for(std::vector<Vec3d>::const_iterator itr=vertices.begin();
                 itr != vertices.end();
                 ++itr)

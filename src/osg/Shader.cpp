@@ -676,7 +676,7 @@ void Shader::PerContextShader::compileShader(osg::State& state)
         replaceAll(source, "\r\n", " \n");
 
         std::string versionLine;
-        unsigned int lineNum = 0;
+        unsigned int __attribute__((unused)) lineNum = 0;
         std::string::size_type previous_pos = 0;
         do
         {

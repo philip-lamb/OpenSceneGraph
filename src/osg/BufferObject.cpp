@@ -1099,7 +1099,7 @@ void GLBufferObjectManager::recomputeStats(std::ostream& out) const
     unsigned int numObjectsInLists = 0;
     unsigned int numActive = 0;
     unsigned int numOrphans = 0;
-    unsigned int numPendingOrphans = 0;
+    unsigned int __attribute__((unused)) numPendingOrphans = 0;
     unsigned int currentSize = 0;
     for(GLBufferObjectSetMap::const_iterator itr = _glBufferObjectSetMap.begin();
         itr != _glBufferObjectSetMap.end();
