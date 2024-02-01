@@ -39,12 +39,17 @@ VERSION="${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
 BUILD_DIR="build-wasm"
 INSTALL_DIR="openscenegraph-${VERSION}-wasm"
 
+# libgdal.a is too big for GitHub, so might be packaged as a zip.
+if [ ! -f "${OSG_ROOT}/3rdParty/WebAssembly/lib/libgdal.a" ] && [ -f "${OSG_ROOT}/3rdParty/WebAssembly/lib/libgdal.zip" ] ; then
+	unzip "${OSG_ROOT}/3rdParty/WebAssembly/lib/libgdal.zip" -d "${OSG_ROOT}/3rdParty/WebAssembly/lib"
+fi
+
 if [ -d "${BUILD_DIR}" ]; then
   echo "The build directory '${OSG_ROOT}/${BUILD_DIR}' already exists. Skipping build."
 else
   mkdir "${BUILD_DIR}" && cd "${BUILD_DIR}"
 
-  SETTINGS="-s USE_ZLIB=1 -s USE_LIBJPEG=1 -s USE_LIBPNG=1 -s USE_FREETYPE=1 -s USE_PTHREADS=1"
+  SETTINGS="-s USE_ZLIB=1 -s USE_LIBJPEG=1 -s USE_LIBPNG=1 -s USE_FREETYPE=1 -s USE_PTHREADS=1 -s GL_ENABLE_GET_PROC_ADDRESS"
   export CFLAGS="${SETTINGS}"
   export CXXFLAGS="${SETTINGS} -std=c++11"
   export LDFLAGS="${SETTINGS}"

@@ -1,5 +1,6 @@
 /* port/cpl_config.h.  Generated from cpl_config.h.in by configure.  */
 /* port/cpl_config.h.in.  Generated from configure.in by autoheader.  */
+/* $Id$ */
 
 /* Define if you want to use pthreads based multiprocessing support */
 /* #undef CPL_MULTIPROC_PTHREAD */
@@ -14,7 +15,7 @@
 /* #undef HAVE_PTHREAD_SPINLOCK */
 
 /* Define to 1 if you have the 5 args `mremap' function. */
-#define HAVE_5ARGS_MREMAP 1
+/* #undef HAVE_5ARGS_MREMAP */
 
 /* --prefix directory for GDAL install */
 #define GDAL_PREFIX "/usr/local"
@@ -24,6 +25,15 @@
 
 /* Define to 1 if you have the `atoll' function. */
 #define HAVE_ATOLL 1
+
+/* Define to 1 if you have the `strtoull' function. */
+#define HAVE_STRTOULL 1
+
+/* Define to 1 if you have the `getrlimit' function. */
+#define HAVE_GETRLIMIT 1
+
+/* Define to 1 if you have the `RLIMIT_AS' constant. */
+#define HAVE_RLIMIT_AS 1
 
 /* Define to 1 if you have the <csf.h> header file. */
 /* #undef HAVE_CSF_H */
@@ -72,6 +82,9 @@
 /* Define to 1 if the system has the type `int8'. */
 /* #undef HAVE_INT8 */
 
+/* Define to 1 if the system has the type `__uint128_t'. */
+#define HAVE_UINT128_T 1
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
@@ -98,6 +111,9 @@
 
 /* Define to 1, if your compiler supports long long data type */
 #define HAVE_LONG_LONG 1
+
+/* Define to 1, if your compiler supports uintptr_t data type */
+#define HAVE_UINTPTR_T 1
 
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
@@ -147,14 +163,23 @@
 /* Define to 1 if you have the `posix_spawnp' function. */
 /* #undef HAVE_POSIX_SPAWNP */
 
+/* Define to 1 if you have the `posix_memalign' function. */
+#define HAVE_POSIX_MEMALIGN 1
+
 /* Define to 1 if you have the `vfork' function. */
 #define HAVE_VFORK 1
 
 /* Define to 1 if you have the `mmap' function. */
 #define HAVE_MMAP 1
 
+/* Define to 1 if you have the `sigaction' function. */
+#define HAVE_SIGACTION 1
+
 /* Define to 1 if you have the statvfs' function. */
 #define HAVE_STATVFS 1
+
+/* Define to 1 if you have the `statvfs64' function. */
+/* #undef HAVE_STATVFS64 */
 
 /* Define to 1 if you have the `lstat' function. */
 #define HAVE_LSTAT 1
@@ -167,6 +192,9 @@
 
 /* For .cpp files, define as const if the declaration of iconv() needs const. */
 #define ICONV_CPP_CONST 
+
+/* Define to 1 if libjvm.so should be dlopen'd */
+/* #undef JVM_LIB_DLOPEN */
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
@@ -199,17 +227,20 @@
 /* Define to 1 if GCC atomic builtins are available */
 #define HAVE_GCC_ATOMIC_BUILTINS 1
 
+/* Define to 1 if GCC bswap builtins are available */
+/* #undef HAVE_GCC_BSWAP */
+
 /* Define to name of 64bit fopen function */
-#define VSI_FOPEN64 fopen64
+#define VSI_FOPEN64 fopen
 
 /* Define to name of 64bit ftruncate function */
-#define VSI_FTRUNCATE64 ftruncate64
+#define VSI_FTRUNCATE64 ftruncate
 
 /* Define to name of 64bit fseek func */
-#define VSI_FSEEK64 fseeko
+#define VSI_FSEEK64 fseeko64
 
 /* Define to name of 64bit ftell func */
-#define VSI_FTELL64 ftello
+#define VSI_FTELL64 ftello64
 
 /* Define to 1, if you have 64 bit STDIO API */
 #define VSI_LARGE_API_SUPPORTED 1
@@ -240,3 +271,9 @@
 
 /* Define to 1 if you have the `uselocale' function. */
 #define HAVE_USELOCALE 1
+
+/* Define to 1 if you have the `std::isnan' function. */
+#define HAVE_STD_IS_NAN 1
+
+/* Define to 1 if the compiler supports -Wzero-as-null-pointer-constant */
+#define HAVE_GCC_WARNING_ZERO_AS_NULL_POINTER_CONSTANT 1

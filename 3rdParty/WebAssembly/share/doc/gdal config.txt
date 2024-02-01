@@ -1,18 +1,21 @@
-GDAL is now configured for x86_64-apple-darwin20.3.0
+GDAL is now configured for x86_64-apple-darwin23.1.0
 
   Installation directory:    /usr/local
-  C compiler:                /Users/phil/r/emsdk/upstream/emscripten/emcc  -g -O2 -fPIC
-  C++ compiler:              /Users/phil/r/emsdk/upstream/emscripten/em++  -g -O2 -fPIC
+  C compiler:                emsdk/upstream/emscripten/emcc  -g -O2 -fPIC
+  C++ compiler:              emsdk/upstream/emscripten/em++  -g -O2 -fPIC
+  C++14 support:             no
 
   LIBTOOL support:           no
 
   LIBZ support:              internal
   LIBLZMA support:           no
+  ZSTD support:              no
   cryptopp support:          no
+  crypto/openssl support:    no
   GRASS support:             no
   CFITSIO support:           no
   PCRaster support:          no
-  LIBPNG support:            external
+  LIBPNG support:            internal
   DDS support:               no
   GTA support:               no
   LIBTIFF support:           internal (BigTIFF=yes)
@@ -21,6 +24,7 @@ GDAL is now configured for x86_64-apple-darwin20.3.0
   12 bit JPEG:               no
   12 bit JPEG-in-TIFF:       no
   LIBGIF support:            no
+  JPEG-Lossless/CharLS:      no
   OGDI support:              no
   HDF4 support:              no
   HDF5 support:              no
@@ -32,6 +36,7 @@ GDAL is now configured for x86_64-apple-darwin20.3.0
   ECW support:               no
   MrSID support:             no
   MrSID/MG4 Lidar support:   no
+  JP2Lura support:           no
   MSG support:               no
   GRIB support:              no
   EPSILON support:           no
@@ -39,6 +44,7 @@ GDAL is now configured for x86_64-apple-darwin20.3.0
   cURL support (wms/wcs/...):no
   PostgreSQL support:        no
   MRF support:               no
+  LERC support:              yes
   MySQL support:             no
   Ingres support:            no
   Xerces-C support:          no
@@ -59,9 +65,11 @@ GDAL is now configured for x86_64-apple-darwin20.3.0
   SQLite support:            no
   PCRE support:              no
   SpatiaLite support:        no
-  DWGdirect support          no
+  RasterLite2 support:       no
+  Teigha (DWG and DGNv8):    no
   INFORMIX DataBlade support:no
   GEOS support:              no
+  SFCGAL support:            no
   QHull support:             no
   Poppler support:           no
   Podofo support:            no
@@ -71,13 +79,16 @@ GDAL is now configured for x86_64-apple-darwin20.3.0
   FreeXL support:            no
   SOSI support:              no
   MongoDB support:           no
+  HDFS support:              no
+  userfaultfd support:       no
 
   Mac OS X Framework :       no
 
   SWIG Bindings:             no
 
-  Statically link PROJ.4:    yes
+  Statically link PROJ:      yes
   enable GNM building:       no
   enable pthread support:    no
   enable POSIX iconv support:yes
   hide internal symbols:     no
+
